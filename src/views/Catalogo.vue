@@ -41,7 +41,7 @@
           </div>
           <div class="select is-link">
             <select>
-              <option v-for="(categoria, index) in categoriaList" :key="index">{{ categoria.descripcion }}</option>
+              <option v-for="(categoria, index) in categoriaList" :key="index">{{ categoria.descrip }}</option>
             </select>
           </div>
         </div>
@@ -71,10 +71,10 @@
                 <div class="content">
                   <img src="../assets/images/generic-product.png" width="150" class="image-product"
                        :alt="product.nombre"/>
-                  <p v-if="product.descripcion"><strong>Descripción: </strong> {{ product.descripcion }} </p>
+                  <p v-if="product.descrip"><strong>Descripción: </strong> {{ product.descrip }} </p>
                   <p v-if="product.estado"><strong>Estado: </strong> {{ product.estado }} </p>
-                  <p v-if="product._categoria.descripcion"><strong>Categoria: </strong>
-                    {{ product._categoria.descripcion }} </p>
+                  <!--<p v-if="product._categoria.descrip"><strong>Categoria: </strong> 
+                    {{ product._categoria.descrip }} </p>-->
 
                 </div>
               </div>
@@ -99,7 +99,6 @@
     <div class="pagination-area">
       <PaginationComponent :page="pagination.page" :pages="pagination.pages" @selected="(page) => searchProducts(page)"></PaginationComponent>
     </div>
-
     <div class="pageloader is-bottom-to-top is-link" style="opacity: 0.8" :class="{'is-active': loading}"><span class="title">Cargando productos...</span></div>
 
   </div>
@@ -126,7 +125,7 @@ export default {
     }
   },
   mounted() {
-    this.searchProducts();
+    this.searchProducts(); //al abrir la pagina busca los productos
     this.getCategorias();
   },
   methods: {
@@ -159,7 +158,7 @@ export default {
         this.loading = false;
       }
     },
-    async getCategorias() {
+    async getCategorias() { //significa que hace la llamada a un servicio y tiene que esperar a que ese servicio me responda
       try {
         let data = (await HTTP.get(`/categorias`)).data;
         if (data.items) {
@@ -168,7 +167,7 @@ export default {
           this.categoriaList = data;
         }
         // Se agrega al principio la opción 'Todos'
-        this.categoriaList = [{descripcion: 'Todos'}, ...this.categoriaList];
+        this.categoriaList = [{descrip: 'Todos'}, ...this.categoriaList];
       } catch (error) {
         this.categoriaList = [];
       }
