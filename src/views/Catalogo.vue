@@ -70,8 +70,10 @@
                   <img src="../assets/images/generic-product.png" width="150" class="image-product"
                        :alt="product.nombre"/>
                   <p v-if="product.descrip"><strong>Descripción: </strong> {{ product.descrip }} </p>
+                  <p v-if="product.precio"><strong>Precio: </strong> {{ product.precio }} </p>
                   <p v-if="product.estado"><strong>Estado: </strong> {{ product.estado }} </p>
                   <p v-if="product._categoria.descrip"><strong>Categoria: </strong> 
+
                     {{ product._categoria.descrip }} </p>
 
                 </div>
@@ -130,10 +132,8 @@ export default {
   methods: {
     async searchProducts(page) {
       this.loading = true;
-      //this.search.descrip = this.buscador
       this.search.nombre = this.buscador
       console.log(this.search.nombre)
-      //this.search.proveedor
       try {
         let data = (await HTTP.post(`/search/productos`,this.search, {
           params: {
