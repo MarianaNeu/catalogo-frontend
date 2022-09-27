@@ -16,22 +16,20 @@
     <div class="search-area">
       <nav class="level">
         <!-- Left side -->
-        <div class="level-left">
+        <form class="level-left" @submit.prevent="searchProducts">
           <div class="level-item">
             <div class="field has-addons">
               <p class="control is-expanded">
-                <input class="input" type="text" placeholder="búsqueda de productos..." style="min-width: calc(45vw)">
+                <input class="input" type="text" placeholder="búsqueda de productos..." style="min-width: calc(45vw)" v-model='buscador'>
               </p>
               <p class="control">
                 <button class="button is-link">
-                  <font-awesome-icon icon="search"/>
                   Buscar
                 </button>
               </p>
             </div>
           </div>
-        </div>
-
+        </form>
         <!-- Right side -->
         <div class="level-right">
           <div class="level-item">
@@ -73,8 +71,8 @@
                        :alt="product.nombre"/>
                   <p v-if="product.descrip"><strong>Descripción: </strong> {{ product.descrip }} </p>
                   <p v-if="product.estado"><strong>Estado: </strong> {{ product.estado }} </p>
-                  <!--<p v-if="product._categoria.descrip"><strong>Categoria: </strong> 
-                    {{ product._categoria.descrip }} </p>-->
+                  <p v-if="product._categoria.descrip"><strong>Categoria: </strong> 
+                    {{ product._categoria.descrip }} </p>
 
                 </div>
               </div>
@@ -116,6 +114,7 @@ export default {
       loading: false,
       search: {
       },
+      buscador: null,
       pagination: {
         page: 1,
         pages: 1
@@ -131,8 +130,12 @@ export default {
   methods: {
     async searchProducts(page) {
       this.loading = true;
+      //this.search.descrip = this.buscador
+      this.search.nombre = this.buscador
+      console.log(this.search.nombre)
+      //this.search.proveedor
       try {
-        let data = (await HTTP.post(`/search/productos`, {
+        let data = (await HTTP.post(`/search/productos`,this.search, {
           params: {
             page: page ? page : 1
           }
