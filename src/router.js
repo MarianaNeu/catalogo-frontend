@@ -5,6 +5,8 @@ import NotFound from "@/views/NotFound";
 import About from "@/views/About";
 import Catalogo from "@/views/Catalogo";
 import Producto from "@/views/Producto";
+import Edit from '../src/views/Edit';
+import Add from '../src/views/Add';
 
 Vue.use(Router)
 
@@ -25,6 +27,16 @@ const router = new Router({
       name: 'producto',
       component: Producto
     },
+    {
+      path: '/edit', 
+      name: 'editProduct',
+      component: Edit,
+  },
+  {
+      path: '/add', 
+      name: 'addProduct',
+      component: Add,
+  },
     {
       path: '/about',
       name: 'about',
