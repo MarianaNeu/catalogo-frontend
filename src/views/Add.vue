@@ -49,12 +49,12 @@ export default{
     },
     methods:{
         cancelar(){
-            this.$router.push({name: "Producto"});
+            this.$router.push({name: "Product"});
         },
         add(){
             axios.post(`http://localhost:5000/api/productos`, this.newProduct)
               .then(()=> {
-                this.$router.push({name: "Producto"});
+                this.$router.push({name: "Product"});
               })
               .catch((error) => {
                 console.log(error);
