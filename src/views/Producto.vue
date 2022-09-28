@@ -73,26 +73,23 @@
 
                     {{ product._categoria.descrip }} </p>
                 </div>
-                <nav class = 'level is-mobilde'>
-                  <div class="level-right"> 
-                    <button class = "button is-link" @click.prevent="edit(product)">
-                      Editar
-                    </button>
-                    <button class = "button is-link" @click.prevent="del(product)">
-                      Borrar
-                    </button>
-                  </div>
-                </nav>
+                
 
               </div>
 
               <footer class="card-footer">
-                <a href="#" class="card-footer-item">
-                  <span class="icon"><font-awesome-icon icon="pencil"/></span> Editar
-                </a>
-                <a href="#" class="card-footer-item">
-                  <span class="icon"><font-awesome-icon icon="trash" />/></span> Eliminar
-                </a>
+                <nav class = 'level is-mobilde'>
+                  <div class="level-right"> 
+                    <button class = "button is-link" @click.prevent="edit(product)">
+                      <font-awesome-icon icon="pen"/>
+                      Editar
+                    </button>
+                    <button class = "button is-link" @click.prevent="del(product)">
+                      <font-awesome-icon icon="trash"/>
+                      Borrar
+                    </button>
+                  </div>
+                </nav>
               </footer>
 
             </div>
