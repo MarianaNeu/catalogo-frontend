@@ -4,14 +4,14 @@
     <div class="field">
     <label class="label">Descripcion</label>
     <div class="control">
-        <input class="input" type="text" v-model="producto.descrip" placeholder="Descripcion del producto" required>
+        <input class="input" type="text" v-model="product.descrip" placeholder="Descripcion del producto" required>
     </div>
     </div>
 
     <div class="field">
     <label class="label">Estado</label>
     <div class="control">
-        <input class="input" type="text" v-model="producto.status" placeholder="Estado del producto" required>
+        <input class="input" type="text" v-model="product.status" placeholder="Estado del producto" required>
     </div>
     </div>
 
@@ -31,10 +31,10 @@
 import axios from 'axios';
 
 export default {
-    name:"EditProducto",
+    name:"EditProduct",
     data() {
         return{
-            producto:{
+            product:{
                 nombre: null,
                 descrip: null,
                 precio: null,
@@ -43,16 +43,16 @@ export default {
         };
     },
     created() {
-        this.producto = this.$route.query.inst;
+        this.product = this.$route.query.inst;
     },
     methods:{
         cancelar(){
-            this.$router.push({name: "Producto"});
+            this.$router.push({name: "Product"});
         },
         edit(){
-            axios.put(`http://localhost:5000/api/productos/${this.producto.id}`, this.producto)
+            axios.put(`http://localhost:5000/api/products/${this.product.id}`, this.product)
               .then(()=> {
-                this.$router.push({name: "Producto"});
+                this.$router.push({name: "Product"});
               })
               .catch((error) => {
                 console.log(error);

@@ -4,14 +4,14 @@
     <div class="field">
     <label class="label">Descripcion</label>
     <div class="control">
-        <input class="input" type="text" v-model="newProducto.descrip" placeholder="Descripcion del producto" required>
+        <input class="input" type="text" v-model="newProduct.descrip" placeholder="Descripcion del producto" required>
     </div>
     </div>
 
     <div class="field">
     <label class="label">Estado</label>
     <div class="control">
-        <input class="input" type="text" v-model="newProducto.status" placeholder="Estado del producto" required>
+        <input class="input" type="text" v-model="newProduct.status" placeholder="Estado del producto" required>
     </div>
     </div> 
 
@@ -30,10 +30,10 @@
 <script>
 import axios from 'axios';
 export default{
-    name: "AddProducto",
+    name: "AddProduct",
     data(){
         return {
-            newProducto: {
+            newProduct: {
                 name: null,
                 descrip: null,
                 precio: null,
@@ -44,15 +44,15 @@ export default{
         };
     },
     mounted(){
-        this.newProducto={
+        this.newProduct={
         }
     },
     methods:{
         cancelar(){
-            this.$router.push({name: "Producto"});
+            this.$router.push({name: "Product"});
         },
         add(){
-            axios.post(`http://localhost:5000/api/productos`, this.newProducto)
+            axios.post(`http://localhost:5000/api/products`, this.newProduct)
               .then(()=> {
                 this.$router.push({name: "Producto"});
               })
