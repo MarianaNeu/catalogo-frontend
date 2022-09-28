@@ -30,18 +30,15 @@
             </div>
           </div>
         </form>
-        <!-- Right side -->
+
         <div class="level-right">
-          <div class="level-item">
-            <p class="subtitle is-5">
-              <strong>Filtrar por</strong> Categoría
-            </p>
-          </div>
-          <div class="select is-link">
-            <select>
-              <option v-for="(categoria, index) in categoriaList" :key="index">{{ categoria.descrip }}</option>
-            </select>
-          </div>
+            <div class="field has-addons">
+                <p class="control">
+                  <button class="button is-link" @click.prevent='add'>
+                    Agregar 
+                  </button>
+                </p>
+            </div>
         </div>
       </nav>
     </div>
@@ -75,16 +72,26 @@
                   <p v-if="product._categoria.descrip"><strong>Categoria: </strong> 
 
                     {{ product._categoria.descrip }} </p>
-
                 </div>
+                <nav class = 'level is-mobilde'>
+                  <div class="level-right"> 
+                    <button class = "button is-link" @click.prevent="edit(product)">
+                      Editar
+                    </button>
+                    <button class = "button is-link" @click.prevent="del(product)">
+                      Borrar
+                    </button>
+                  </div>
+                </nav>
+
               </div>
 
               <footer class="card-footer">
                 <a href="#" class="card-footer-item">
-                  <span class="icon"><font-awesome-icon icon="credit-card"/></span> Comprar
+                  <span class="icon"><font-awesome-icon icon="pencil"/></span> Editar
                 </a>
                 <a href="#" class="card-footer-item">
-                  <span class="icon"><font-awesome-icon icon="heart"/></span> Favorito
+                  <span class="icon"><font-awesome-icon icon="trash" />/></span> Eliminar
                 </a>
               </footer>
 
@@ -107,6 +114,7 @@
 <script>
 import {HTTP} from '@/http'
 import PaginationComponent from "../components/PaginationComponent";
+import axios from 'axios';
 
 export default {
   name: "Producto",
@@ -122,14 +130,28 @@ export default {
         pages: 1
       },
       productList: [],
-      categoriaList: []
     }
   },
   mounted() {
     this.searchProducts(); //al abrir la pagina busca los productos
-    this.getCategorias();
   },
   methods: {
+    add(){
+          this.$router.push({name: 'addProduct'})
+        },
+        edit(instance){
+            this.$router.push({name: 'editProduct', query: {inst:instance}})
+        },
+        del(instance){
+          axios.delete(`http://localhost:5000/api/productos/${instance.id}`)
+            .then(()=>{
+                this.searchProduct();
+            } )
+            .catch((error) => {
+              console.log(error);
+              this.searchProduct();
+            })
+        },
     async searchProducts(page) {
       this.loading = true;
       this.search.nombre = this.buscador
@@ -161,20 +183,6 @@ export default {
         this.loading = false;
       }
     },
-    async getCategorias() { //significa que hace la llamada a un servicio y tiene que esperar a que ese servicio me responda
-      try {
-        let data = (await HTTP.get(`/categorias`)).data;
-        if (data.items) {
-          this.categoriaList = data.items;
-        } else {
-          this.categoriaList = data;
-        }
-        // Se agrega al principio la opción 'Todos'
-        this.categoriaList = [{descrip: 'Todos'}, ...this.categoriaList];
-      } catch (error) {
-        this.categoriaList = [];
-      }
-    }
   }
 }
 </script>
