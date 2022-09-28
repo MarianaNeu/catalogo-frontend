@@ -4,6 +4,7 @@ import Home from "@/views/Home"
 import NotFound from "@/views/NotFound";
 import About from "@/views/About";
 import Catalogo from "@/views/Catalogo";
+import Producto from "@/views/Producto";
 
 Vue.use(Router)
 
@@ -18,6 +19,11 @@ const router = new Router({
       path: '/catalogo',
       name: 'catalogo',
       component: Catalogo
+    },
+    {
+      path: '/producto',
+      name: 'producto',
+      component: Producto
     },
     {
       path: '/about',
