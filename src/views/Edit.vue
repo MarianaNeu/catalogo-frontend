@@ -50,7 +50,7 @@ export default {
             this.$router.push({name: "Product"});
         },
         edit(){
-            axios.put(`http://localhost:5000/api/products/${this.product.id}`, this.product)
+            axios.put(`http://localhost:5000/api/productos/${this.product.id}`, this.product)
               .then(()=> {
                 this.$router.push({name: "Product"});
               })

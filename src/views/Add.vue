@@ -52,7 +52,7 @@ export default{
             this.$router.push({name: "Product"});
         },
         add(){
-            axios.post(`http://localhost:5000/api/products`, this.newProduct)
+            axios.post(`http://localhost:5000/api/productos`, this.newProduct)
               .then(()=> {
                 this.$router.push({name: "Producto"});
               })
