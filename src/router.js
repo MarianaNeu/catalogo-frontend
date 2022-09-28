@@ -23,8 +23,8 @@ const router = new Router({
       component: Catalogo
     },
     {
-      path: '/producto',
-      name: 'producto',
+      path: '/product',
+      name: 'product',
       component: Producto
     },
     {
