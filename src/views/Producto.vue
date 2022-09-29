@@ -114,26 +114,26 @@ import PaginationComponent from "../components/PaginationComponent";
 import axios from 'axios';
 
 export default {
-  name: "Producto",
-  components: { PaginationComponent },
-  data() {
-    return {
-      loading: false,
-      search: {
-      },
-      buscador: null,
-      pagination: {
-        page: 1,
-        pages: 1
-      },
-      productList: [],
-    }
-  },
-  mounted() {
-    this.searchProducts(); //al abrir la pagina busca los productos
-  },
-  methods: {
-    add(){
+    name: "Producto",
+    components: { PaginationComponent },
+    data() {
+        return {
+            loading: false,
+            search: {
+            },
+            buscador: null,
+            pagination: {
+                page: 1,
+                pages: 1
+            },
+            productList: [],
+        };
+    },
+    mounted() {
+        this.searchProducts(); //al abrir la pagina busca los productos
+    },
+    methods: {
+        add(){
           this.$router.push({name: 'addProduct'})
         },
         edit(instance){
@@ -142,17 +142,17 @@ export default {
         del(instance){
           axios.delete(`http://localhost:5000/api/productos/${instance.id}`)
             .then(()=>{
-                this.searchProduct();
+                this.searchProducts();
             } )
             .catch((error) => {
               console.log(error);
-              this.searchProduct();
+              this.searchProducts();
             })
         },
-    async searchProducts(page) {
-      this.loading = true;
-      this.search.nombre = this.buscador
-      console.log(this.search.nombre)
+        async searchProducts(page) {
+            this.loading = true;
+            this.search.nombre = this.buscador
+            console.log(this.search.nombre)
       try {
         let data = (await HTTP.post(`/search/productos`,this.search, {
           params: {
@@ -168,19 +168,19 @@ export default {
           this.pagination = {};
         }
       } catch (error) {
-        //eslint-disable-next-line no-prototype-builtins
+            //eslint-disable-next-line no-prototype-builtins
         if (!error.hasOwnProperty('response')) {
           this.notificar('error', this.title, 'Ha ocurrido un error inesperado. Error: ' + error);
         }
         if (error.response.status !== 404) {
           this.notificar('error', this.title, 'No se han podido obtener la lista de proyectos. Error: ' + error);
         }
-        this.productList = [];
+          this.productList = [];
       } finally {
         this.loading = false;
       }
-    },
-  }
+        }
+    }
 }
 </script>
 
