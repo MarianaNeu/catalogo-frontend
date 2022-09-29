@@ -21,8 +21,8 @@
           </a>
         </router-link>
 
-        <router-link class="navbar-item" to="/producto">
-          <a class="navbar-item" :class="{'navbar-active': currentRouteName === 'producto'}">
+        <router-link class="navbar-item" to="/product">
+          <a class="navbar-item" :class="{'navbar-active': currentRouteName === 'product'}">
             <strong>Producto</strong>
           </a>
         </router-link>

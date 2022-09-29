@@ -2,6 +2,13 @@
     <div>
     <div class="box ">
     <div class="field">
+    <label class="label">Nombre</label>
+    <div class="control">
+        <input class="input" type="text" v-model="newProduct.nombre" placeholder="Nombre del producto" required>
+    </div>
+    </div>
+
+    <div class="field">
     <label class="label">Descripcion</label>
     <div class="control">
         <input class="input" type="text" v-model="newProduct.descrip" placeholder="Descripcion del producto" required>
@@ -11,7 +18,28 @@
     <div class="field">
     <label class="label">Estado</label>
     <div class="control">
-        <input class="input" type="text" v-model="newProduct.status" placeholder="Estado del producto" required>
+        <input class="input" type="text" v-model="newProduct.estado" placeholder="Estado del producto" required>
+    </div>
+    </div> 
+
+    <div class="field">
+    <label class="label">Precio</label>
+    <div class="control">
+        <input class="input" type="text" v-model="newProduct.precio" placeholder="Precio del producto" required>
+    </div>
+    </div> 
+
+    <div class="field">
+    <label class="label">Categoria</label>
+    <div class="control">
+        <input class="input" type="text" v-model="newProduct.categoria_id" placeholder="ID de la categoria" required>
+    </div>
+    </div> 
+
+    <div class="field">
+    <label class="label">Proveedor</label>
+    <div class="control">
+        <input class="input" type="text" v-model="newProduct.proveedor_id" placeholder="ID del Proveedor" required>
     </div>
     </div> 
 
@@ -49,12 +77,12 @@ export default{
     },
     methods:{
         cancelar(){
-            this.$router.push({name: "Product"});
+            this.$router.push({name: "producto"});
         },
         add(){
             axios.post(`http://localhost:5000/api/productos`, this.newProduct)
               .then(()=> {
-                this.$router.push({name: "Product"});
+                this.$router.push({name: "producto"});
               })
               .catch((error) => {
                 console.log(error);

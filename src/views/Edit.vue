@@ -11,7 +11,14 @@
     <div class="field">
     <label class="label">Estado</label>
     <div class="control">
-        <input class="input" type="text" v-model="product.status" placeholder="Estado del producto" required>
+        <input class="input" type="text" v-model="product.estado" placeholder="Estado del producto" required>
+    </div>
+    </div>
+
+    <div class="field">
+    <label class="label">Precio</label>
+    <div class="control">
+        <input class="input" type="text" v-model="product.precio" placeholder="Precio del producto" required>
     </div>
     </div>
 
@@ -47,12 +54,12 @@ export default {
     },
     methods:{
         cancelar(){
-            this.$router.push({name: "Product"});
+            this.$router.push({name: "product"});
         },
         edit(){
             axios.put(`http://localhost:5000/api/productos/${this.product.id}`, this.product)
               .then(()=> {
-                this.$router.push({name: "Product"});
+                this.$router.push({name: "product"});
               })
               .catch((error) => {
                 console.log(error);
